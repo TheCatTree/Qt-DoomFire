@@ -10,4 +10,5 @@ HEADERS += \
         tst_drawingwindow.h
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        mock_turfle_test.cpp
