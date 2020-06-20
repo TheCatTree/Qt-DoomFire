@@ -1,10 +1,10 @@
 # QT DOOM FIRE
 
-This is a little qt program that allows you to run demo scene effects, using Lua Script.
+This is a little qt program, that allows you to run demo scene effects. Effects are written in lua script.
 
 ## Getting Started
 
-Will Need QT Creator to run and a static Lua 5.3 library for your system.
+Will need QT Creator, to run, and a static Lua 5.3 library.
 
 ## Built With
 
@@ -14,15 +14,15 @@ Will Need QT Creator to run and a static Lua 5.3 library for your system.
 
 ## Contributing
 
-Steven Hartley
+Steven Hartley.
 
 ## Versioning
 
-Version: alpha 0.1
+Version: alpha 0.1.
 
 ## Authors
 
-* **Steven Hartley**
+* **Steven Hartley**.
 
 ## License
 
@@ -30,5 +30,5 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-* QT Forums
+* QT Forums.
 * Whoever wrote Luna Wrapper (Can not find name).
