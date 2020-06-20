@@ -1,12 +1,12 @@
 #include "lcdscreen.h"
-#include <QDebug>
+#include <iostream>
 LcdScreen::LcdScreen(QWidget *parent, QColor background_colour)
     : QWidget(parent), m_background_colour(background_colour)
 {
 
     m_height = 10;
     m_width = 10;
-    m_screen_buffer =  QImage(m_width, m_height, QImage::Format_RGB16);
+    m_screen_buffer =  QImage(m_width, m_height, QImage::Format_RGB32);
     qDebug() << "background_colour: " << m_background_colour.name();
     m_screen_refresher = new QTimer(this);
     connect(m_screen_refresher, &QTimer::timeout,
@@ -22,6 +22,7 @@ void LcdScreen::paintEvent(QPaintEvent *event){
 
 
 void LcdScreen::writeBuffer(int x, int y, int r, int g, int b){
+    //qDebug() << "screen writeBuffer";
     QRgb colour = qRgb(r,g,b);
     writeBuffer(x,y, colour);
 }
@@ -30,6 +31,38 @@ void LcdScreen::writeBuffer(int x, int y, QRgb colour){
     m_screen_buffer.setPixel(x,y,colour);
 }
 
+void LcdScreen::writeBufferLine(int lwidth, int y, int *values, int pcount){
+     QRgb *line = reinterpret_cast<QRgb*>(m_screen_buffer.scanLine(y));
+    QRgb colour;
+    //qDebug() << lwidth;
+    int x = 0;
+    for(int i = 0; i< lwidth;i++){
+        if(pcount <= i){
+            colour = qRgb(255,255,255);
+
+        }else{
+            x = x + 3;
+            colour = qRgb(values[x],values[x + 1], values[x + 2]);
+
+
+        }
+        if((i==0 || i== 100)&& *line != colour){
+            qDebug() << "pixil" << i;
+            qDebug() << "colour";
+            qDebug() <<std::hex << colour;
+            qDebug() << "line before";
+            qDebug() <<std::hex << *line;
+            *line = colour;
+            qDebug() << "line after";
+            qDebug() <<std::hex << *line;
+            ++line;
+        }else{
+        *line = colour;
+        ++line;
+        }
+    }
+
+}
 void LcdScreen::blankScreen(){
     qDebug() << "blanking screen";
     for( int x = 0;  x < m_width; x++){
@@ -39,6 +72,17 @@ void LcdScreen::blankScreen(){
     }
 }
 
+int LcdScreen::lua_blankScreen(lua_State *luaState ){
+    qDebug() << "Lua blank screen.";
+    blankScreen();
+    return 0;
+}
+
+int LcdScreen::lua_changeBackground(lua_State * luaState){
+    qDebug() << "Lua randomBackground.";
+    randomBackground();
+    return 0;
+}
 void LcdScreen::showEvent(QShowEvent *event){
     m_height = this->height();
     m_width = this->width();

@@ -1,6 +1,7 @@
-QT       += core gui
+QT -= gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = lib
+DEFINES += LUAINTERGRATION_LIBRARY
 
 CONFIG += c++11
 
@@ -14,34 +15,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-INCLUDEPATH += C:\LUA\lua-5.3.5\include
-LIBS += -LC:\LUA\lua\bin -llua53static
-include(../LuaInput/luatextinput.pri)
-
 
 SOURCES += \
-    drawer.cpp \
-    fire.cpp \
-    lcdscreen.cpp \
-    lua_lcdscreen_adapter.cpp \
-    main.cpp \
-    mainwindow.cpp
+    luaintergration.cpp
 
 HEADERS += \
-    drawer.h \
-    fire.h \
-    lcdscreen.h \
-    lua_lcdscreen_adapter.h \
-    luna.h \
-    mainwindow.h \
-    scripts.h
-
-FORMS += \
-    mainwindow.ui
+    Lua-Intergration_global.h \
+    luaintergration.h
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix {
+    target.path = /usr/lib
+}
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES +=

@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     DoomFire \
-    DoomFire-tests
+    LuaInput
+

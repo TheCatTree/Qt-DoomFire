@@ -9,7 +9,7 @@
 #include <QTimer>
 #include <QDebug>
 
-#include "lcdscreen.h"
+#include "lua_lcdscreen_adapter.h"
 
 class Fire : public QObject
 {

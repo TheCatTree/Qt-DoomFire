@@ -58,7 +58,7 @@ void Fire::spreadFire(int src){
     if(dst < 0){dst = 0;}
     if(dst > size_firevalues - 1){dst = size_firevalues - 1;}
     if(firevalues[src] > 0){
-    firevalues[dst] = firevalues[src] - (static_cast <float> (rand()) / static_cast <float> (RAND_MAX/2));
+    firevalues[dst] = firevalues[src] - (static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
      if(firevalues[dst] < 0){firevalues[dst] = 0;}
     }
 }
